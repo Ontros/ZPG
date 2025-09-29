@@ -34,8 +34,9 @@
 //static double mouseY = 0;
 
 #include "Timer.h"
-#include "ShaderModule.h"
+#include "ShaderProgram.h"
 #include "Model.h"
+
 
 static void error_callback(int error, const char* description) { fputs(description, stderr); }
 
@@ -76,9 +77,11 @@ public:
 private:
 	GLFWwindow* m_window = nullptr;
 	GLuint m_VAO = 0;
-	ShaderModule* m_shaderModuleTri = nullptr;
+	ShaderProgram* m_shaderModuleTri = nullptr;
 	Model* m_modelTri = nullptr;
-	ShaderModule* m_shaderModuleSq = nullptr;
+	ShaderProgram* m_shaderModuleSq = nullptr;
 	Model* m_modelSq = nullptr;
+	ShaderProgram* m_shaderModuleSu = nullptr;
+	Model* m_modelSu = nullptr;
 	Timer* m_timer = nullptr;
 };

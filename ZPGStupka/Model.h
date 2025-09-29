@@ -13,11 +13,12 @@
 
 class Model {
 public:
-	Model(float* points, int size);
+	Model(float* points, int size, int params);
 	void drawModel();
 
 private:
 	GLuint m_VBO = 0;
 	GLuint m_VAO = 0;
 	int m_triangles = 0;
+	int m_params = 0;
 };

@@ -136,12 +136,19 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="ShaderModule.cpp" />
+    <ClCompile Include="ShaderProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Model.h" />
+    <ClInclude Include="models\bushes.h" />
+    <ClInclude Include="models\gift.h" />
+    <ClInclude Include="models\plain.h" />
+    <ClInclude Include="models\sphere.h" />
+    <ClInclude Include="models\suzi_flat.h" />
+    <ClInclude Include="models\suzi_smooth.h" />
+    <ClInclude Include="models\tree.h" />
     <ClInclude Include="Renderer.h" />
-    <ClInclude Include="ShaderModule.h" />
+    <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

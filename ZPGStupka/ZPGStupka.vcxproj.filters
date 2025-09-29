@@ -24,21 +24,42 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderModule.cpp">
+    <ClCompile Include="ShaderProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Timer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderModule.h">
+    <ClInclude Include="ShaderProgram.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.h">
+    <ClInclude Include="models\bushes.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="models\gift.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="models\plain.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="models\sphere.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="models\suzi_flat.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="models\suzi_smooth.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="models\tree.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
