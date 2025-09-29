@@ -13,7 +13,7 @@
 
 class Model {
 public:
-	Model(float* points, int size, int params);
+	Model(const float* points, int size, int params);
 	void drawModel();
 
 private:

@@ -1,6 +1,6 @@
 #include "Model.h"
 
-Model::Model(float* points, int size, int params)
+Model::Model(const float* points, int size, int params)
 {
 
 	//vertex buffer object (VBO)

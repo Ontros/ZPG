@@ -133,12 +133,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Libraries.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="models\bushes.h" />
     <ClInclude Include="models\gift.h" />
@@ -147,6 +149,7 @@
     <ClInclude Include="models\suzi_flat.h" />
     <ClInclude Include="models\suzi_smooth.h" />
     <ClInclude Include="models\tree.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Timer.h" />

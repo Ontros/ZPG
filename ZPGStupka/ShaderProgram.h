@@ -1,16 +1,6 @@
 #pragma once
 
-// Include GLEW
-#include <GL/glew.h>
-
-//Include GLFW  
-#include <GLFW/glfw3.h>  
-
-
-//Include the standard C++ headers  
-#include <stdlib.h>
-#include <stdio.h>
-#include <glm/ext/matrix_float4x4.hpp>
+#include "Libraries.h"
 
 class ShaderProgram {
 public:

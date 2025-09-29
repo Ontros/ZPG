@@ -1,14 +1,6 @@
 #pragma once
 
-// Include GLEW
-#include <GL/glew.h>
-
-//Include GLFW  
-#include <GLFW/glfw3.h>  
-
-//Include the standard C++ headers  
-#include <stdlib.h>
-#include <stdio.h>
+#include "Libraries.h"
 
 class Timer {
 public:
@@ -19,6 +11,7 @@ public:
 	void timeFrame() {
 		m_currentTime = (float)glfwGetTime();
 		m_deltaTime = m_currentTime - m_timeOfLastFrame;
+		m_timeSinceStart += m_deltaTime;
 		m_timeOfLastFrame = m_currentTime;
 		m_framesThisSecond++;
 		if (m_currentTime > m_timeOfLastSecond + 1.0f) {
@@ -33,10 +26,14 @@ public:
 	float getTimeSinceStartOfSecond() const {
 		return m_currentTime - m_timeOfLastSecond;
 	}
+	float getTimeSinceStart() const {
+		return m_timeSinceStart;
+	}
 private:
 	float m_currentTime = (float)glfwGetTime();
 	float m_timeOfLastFrame = 0;
 	float m_deltaTime = 0;
 	int m_framesThisSecond = 0;
 	float m_timeOfLastSecond = 0;
+	float m_timeSinceStart = 0;
 };

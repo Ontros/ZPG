@@ -1,41 +1,11 @@
 ﻿#pragma once
 
-// Include GLEW
-#include <GL/glew.h>
-
-//Include GLFW  
-#include <GLFW/glfw3.h>  
-
-//Include GLM  
-#include <glm/vec3.hpp> // glm::vec3
-#include <glm/vec4.hpp> // glm::vec4
-#include <glm/mat4x4.hpp> // glm::mat4
-#include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
-#include <glm/gtc/type_ptr.hpp> // glm::value_ptr
-
-//Include the standard C++ headers  
-#include <stdlib.h>
-#include <stdio.h>
-
-// Include Assimp
-//#include <assimp/Importer.hpp>
-//#include <assimp/scene.h>
-//#include <assimp/postprocess.h>
-
-// Include OpenCV
-//#include <opencv2/opencv.hpp>
-
-// Include AntTweakBar
-//#include <AntTweakBar/AntTweakBar.h>
-
-//static bool rightRotation = true;
-//
-//static double mouseX = 0;
-//static double mouseY = 0;
+#include "Libraries.h"
 
 #include "Timer.h"
 #include "ShaderProgram.h"
 #include "Model.h"
+#include "Camera.h"
 
 
 static void error_callback(int error, const char* description) { fputs(description, stderr); }
@@ -77,11 +47,8 @@ public:
 private:
 	GLFWwindow* m_window = nullptr;
 	GLuint m_VAO = 0;
-	ShaderProgram* m_shaderModuleTri = nullptr;
-	Model* m_modelTri = nullptr;
-	ShaderProgram* m_shaderModuleSq = nullptr;
-	Model* m_modelSq = nullptr;
 	ShaderProgram* m_shaderModuleSu = nullptr;
 	Model* m_modelSu = nullptr;
 	Timer* m_timer = nullptr;
+	Camera* m_camera = nullptr;
 };
