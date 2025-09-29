@@ -1,11 +1,15 @@
 #include "Renderer.h"
 #include "models/suzi_flat.h"
 
+GLFWwindow* Renderer::m_window = nullptr;
+
 Renderer::Renderer()
 {
 	m_timer = new Timer();
 	m_camera = new Camera();
 }
+
+static void error_callback(int error, const char* description) { fputs(description, stderr); }
 
 void Renderer::init()
 {
@@ -47,39 +51,25 @@ void Renderer::init()
 	float ratio = width / (float)height;
 	glViewport(0, 0, width, height);
 	glEnable(GL_DEPTH_TEST);
+	//glfwSwapInterval(0);
 
 	m_camera->PrepareWindow(m_window);
 }
 
 void Renderer::loadShaders()
 {
-	const char* vertex_shader_su =
-	"#version 410\n"
-	"layout(location=0) in vec3 vp;"
-	"layout(location=1) in vec3 vn;"
-	"layout(location=0) out vec3 normal;"
-	"out vec3 position;"
-	"uniform mat4 mat;"
-	"void main () {"
-	"     gl_Position = mat*vec4(vp, 1.0);"
-	"     position = vp;"
-	"     normal = vn;"	
-	"}";
-	const char* fragment_shader_su =
-	"#version 410\n"
-	"layout(location=0) in vec3 normal;"
-	"in vec3 position;"
-	"out vec4 frag_colour;"
-	"void main () {"
-	"     frag_colour = vec4(normal, 1.0f);"
-	"}";
-
-	m_shaderModuleSu = new ShaderProgram(vertex_shader_su, fragment_shader_su);
+	m_shaderModuleSu = new ShaderProgram("Shaders/vert.glsl", "Shaders/frag.glsl");
 }
 
 void Renderer::loadModels()
 {
 	m_modelSu = new Model(suziFlat, 17424, 2);
+}
+
+void Renderer::s_throwRuntimeError(const char* error)
+{
+	printf("Runtime error: %s\n", error);
+	glfwSetWindowShouldClose(m_window, 1);
 }
 
 void Renderer::run()

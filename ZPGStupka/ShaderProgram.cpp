@@ -1,16 +1,11 @@
+#include "Renderer.h"
 #include "ShaderProgram.h"
 
-ShaderProgram::ShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode)
+ShaderProgram::ShaderProgram(const char* vertexShaderPath, const char* fragmentShaderPath) : m_vertShader (vertexShaderPath, GL_VERTEX_SHADER), m_fragShader(fragmentShaderPath, GL_FRAGMENT_SHADER)
 {
-	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderCode, NULL);
-	glCompileShader(vertexShader);
-	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderCode, NULL);
-	glCompileShader(fragmentShader);
 	m_id = glCreateProgram();
-	glAttachShader(m_id, fragmentShader);
-	glAttachShader(m_id, vertexShader);
+	glAttachShader(m_id, m_vertShader.GetShader());
+	glAttachShader(m_id, m_fragShader.GetShader());
 	glLinkProgram(m_id);
 
 	GLint status;
@@ -23,21 +18,31 @@ ShaderProgram::ShaderProgram(const char* vertexShaderCode, const char* fragmentS
 		glGetProgramInfoLog(m_id, infoLogLength, NULL, strInfoLog);
 		fprintf(stderr, "Linker failure: %s\n", strInfoLog);
 		delete[] strInfoLog;
+		Renderer::s_throwRuntimeError("Shader failed to compile");
 	}
 }
 
-void ShaderProgram::setShader()
+void ShaderProgram::setShader() const
 {
 	glUseProgram(m_id);
 }
 
 void ShaderProgram::setUniform(float a, const char* uniformName)
 {
-	glUniform1f(glGetUniformLocation(m_id, uniformName), a);
+	glUniform1f(findUniformLocation(uniformName), a);
 }
 
 void ShaderProgram::setUniform(glm::mat4 mat, const char* uniformName)
 {
+	glUniformMatrix4fv(findUniformLocation(uniformName), 1, GL_FALSE, &mat[0][0]);
+}
+
+GLint ShaderProgram::findUniformLocation(const char* uniformName) const
+{
 	GLint id = glGetUniformLocation(m_id, uniformName);
-	glUniformMatrix4fv(id, 1, GL_FALSE, &mat[0][0]);
+	if (id == -1) {
+		printf("Uniform: %s\n", uniformName);
+		Renderer::s_throwRuntimeError("Failed to find uniform");
+	}
+	return id;
 }
