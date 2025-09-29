@@ -51,6 +51,7 @@ void Renderer::init()
 
 void Renderer::loadShaders()
 {
+	bool shadersOk = true;
 	const char* vertex_shader =
 	"#version 330\n"
 	"layout(location=0) in vec3 vp;"
@@ -61,10 +62,11 @@ void Renderer::loadShaders()
 	"#version 330\n"
 	"out vec4 frag_colour;"
 	"void main () {"
-	"     frag_colour = vec4 (0.5, 0.0, 0.5, 1.0);"
+	"     frag_colour = vec4 (1.0, 0.0, 0.0, 1.0);"
 	"}";
 
-	m_shaderModuleTri = new ShaderModule(vertex_shader, fragment_shader);
+	m_shaderModuleTri = new ShaderModule();
+	shadersOk &= m_shaderModuleTri->load(vertex_shader, fragment_shader);
 
 	const char* vertex_shader_sq =
 	"#version 330\n"
@@ -83,7 +85,12 @@ void Renderer::loadShaders()
 	"     frag_colour = vec4 (position.r, position.g, position.b + 0.5, 1.0);"
 	"}";
 
-	m_shaderModuleSq = new ShaderModule(vertex_shader_sq, fragment_shader_sq);
+	m_shaderModuleSq = new ShaderModule();
+	shadersOk &= m_shaderModuleSq->load(vertex_shader_sq, fragment_shader_sq);
+	if (!shadersOk) {
+		fprintf(stderr,"Closing due to shader compilation error\n");
+		throw;
+	}
 }
 
 void Renderer::loadModels()
@@ -113,9 +120,7 @@ void Renderer::run()
 		m_modelTri->drawModel();
 		m_shaderModuleSq->setShader();
 		m_shaderModuleSq->setUniform(m_timer->getTimeSinceStartOfSecond());
-		float f = m_timer->getTimeSinceStartOfSecond();
 		m_modelSq->drawModel();
-		glDrawArrays(GL_TRIANGLES, 0, 6); 
 		glfwPollEvents();
 		glfwSwapBuffers(m_window);
 		m_timer->timeFrame();

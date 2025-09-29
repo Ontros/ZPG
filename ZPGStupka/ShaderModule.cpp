@@ -1,7 +1,10 @@
 #include "ShaderModule.h"
 
-ShaderModule::ShaderModule(const char* vertexShaderCode, const char* fragmentShaderCode)
+ShaderModule::ShaderModule()
 {
+}
+
+bool ShaderModule::load(const char* vertexShaderCode, const char* fragmentShaderCode) {
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexShaderCode, NULL);
 	glCompileShader(vertexShader);
@@ -23,7 +26,10 @@ ShaderModule::ShaderModule(const char* vertexShaderCode, const char* fragmentSha
 		glGetProgramInfoLog(m_id, infoLogLength, NULL, strInfoLog);
 		fprintf(stderr, "Linker failure: %s\n", strInfoLog);
 		delete[] strInfoLog;
+		return false;
 	}
+	return true;
+
 }
 
 void ShaderModule::setShader()

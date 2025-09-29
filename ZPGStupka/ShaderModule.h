@@ -13,7 +13,8 @@
 
 class ShaderModule {
 public:
-	ShaderModule(const char* vertexShaderCode, const char* fragmentShaderCode);
+	ShaderModule();
+	bool load(const char* vertexShaderCode, const char* fragmentShaderCode);
 	void setShader();
 	void setUniform(float a);
 
