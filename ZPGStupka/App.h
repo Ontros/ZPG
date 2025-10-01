@@ -9,9 +9,7 @@ class App {
 public:
 	App();
 	~App();
-	void init();
-	void createWindow();
-	void loadScenes();
+
 	static void s_throwRuntimeError(const char* error);
 	void run();
 private:
@@ -21,4 +19,8 @@ private:
 	Camera* m_camera = nullptr;
 	Scene* m_scenes[3] = { nullptr, };
 	Scene* m_currentScene = nullptr;
+
+	void createWindow();
+	void loadScenes();
+	void handleInputs();
 };

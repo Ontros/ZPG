@@ -89,7 +89,7 @@ void Camera::s_scrollCallback(GLFWwindow* window, double xoffset, double yoffset
         camera->HandleScroll(yoffset);
 }
 
-void Camera::PrepareWindow(GLFWwindow* window)
+void Camera::UseCamera(GLFWwindow* window)
 {
 	glfwSetWindowUserPointer(window, this);
 	glfwSetCursorPosCallback(window, s_mouseCallback);
@@ -104,9 +104,6 @@ void Camera::PrepareWindow(GLFWwindow* window)
 
 void Camera::HandleInputs(const float deltaTime, GLFWwindow* window)
 {
-    glfwPollEvents();
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, 1);
 
     glm::vec3 right = glm::normalize(glm::cross(m_forward, glm::vec3(0.0f, 1.0f, 0.0f)));
     glm::vec3 up = glm::normalize(glm::cross(right, m_forward));

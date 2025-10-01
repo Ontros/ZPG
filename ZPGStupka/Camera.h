@@ -14,7 +14,7 @@ public:
 	const glm::vec3& GetForwardVector() const;
 	bool GetLeftClickedThisFrame();
 	bool GetRightClickedThisFrame();
-	void PrepareWindow(GLFWwindow* window);
+	void UseCamera(GLFWwindow* window);
 	void HandleInputs(float deltaTime, GLFWwindow* window);
 
 private:

@@ -8,6 +8,10 @@ App::App()
 {
 	m_timer = new Timer();
 	m_camera = new Camera();
+
+	createWindow();
+	m_camera->UseCamera(m_window);
+	loadScenes();
 }
 
 App::~App()
@@ -18,13 +22,6 @@ App::~App()
 }
 
 static void error_callback(int error, const char* description) { fputs(description, stderr); }
-
-void App::init()
-{
-	createWindow();
-	m_camera->PrepareWindow(m_window);
-	loadScenes();
-}
 
 void App::createWindow()
 {
@@ -70,12 +67,30 @@ void App::createWindow()
 
 void App::loadScenes()
 {
-	m_scenes[0] = new ComplexScene();
-	m_scenes[1] = new TriangleScene();
+	m_scenes[0] = new TriangleScene();
+	//m_scenes[1] = new CircleScene();
+	m_scenes[2] = new ComplexScene();
 	for (Scene* scene : m_scenes) {
 		if (scene) scene->load();
 	}
-	m_currentScene = m_scenes[0];
+	m_currentScene = m_scenes[1];
+}
+
+void App::handleInputs()
+{
+    glfwPollEvents();
+    if (glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(m_window, 1); 
+	if (glfwGetKey(m_window, GLFW_KEY_1) == GLFW_PRESS) {
+		m_currentScene = m_scenes[0];
+	}
+	if (glfwGetKey(m_window, GLFW_KEY_2) == GLFW_PRESS) {
+		//m_currentScene = m_scenes[1];
+	}
+	if (glfwGetKey(m_window, GLFW_KEY_3) == GLFW_PRESS) {
+		m_currentScene = m_scenes[2];
+	}
+	m_camera->HandleInputs(m_timer->getDeltaTime(), m_window);
 }
 
 void App::s_throwRuntimeError(const char* error)
@@ -89,7 +104,7 @@ void App::s_throwRuntimeError(const char* error)
 void App::run()
 {
 	while (!glfwWindowShouldClose(m_window)) {
-		m_camera->HandleInputs(m_timer->getDeltaTime(), m_window);
+		handleInputs();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		if (m_currentScene->UseCamera()) {
 			glm::mat4 proj = glm::perspective(glm::radians(60.f), 800.f / 600.f, 0.1f, 1000.0f);
@@ -100,13 +115,11 @@ void App::run()
 			}
 		}
 		else {
+			glm::mat4 rotate = glm::rotate(glm::mat4(1), m_timer->getTimeSinceStart(), glm::vec3(0, 0, 1));
 			for (DrawableObject dO : m_currentScene->GetDrawableObjects()) {
-				dO.draw();
+				dO.draw(rotate, "mat");
 			}
 		}
-		//m_shaderModuleSu->setShader();
-		//m_shaderModuleSu->setUniform(proj * view * model, "mat");
-		//m_modelSu->drawModel();
 		glfwSwapBuffers(m_window);
 		m_timer->timeFrame();
 	}
