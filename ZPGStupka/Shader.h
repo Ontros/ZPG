@@ -6,7 +6,8 @@ class Shader
 {
 public:
 	Shader(const char* path, GLenum shaderType);
-	GLuint GetShader();
+	~Shader();
+	GLuint GetShader() const;
 
 private:
 	std::string readShaderFromPath(const char* path);

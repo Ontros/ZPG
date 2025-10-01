@@ -1,11 +1,9 @@
-﻿#include "Renderer.h"
+﻿#include "App.h"
 
 int main(void)
 {
-	Renderer renderer = Renderer();
-	renderer.init();
+	App app = App();
+	app.init();
 
-	renderer.loadShaders();
-	renderer.loadModels();
-	renderer.run();
+	app.run();
 }

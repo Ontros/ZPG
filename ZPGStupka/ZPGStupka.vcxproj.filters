@@ -24,7 +24,7 @@
     <ClCompile Include="Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
+    <ClCompile Include="App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ShaderProgram.cpp">
@@ -36,6 +36,18 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DrawableObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangleScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComplexScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Timer.h">
@@ -44,7 +56,7 @@
     <ClInclude Include="Model.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
+    <ClInclude Include="App.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="ShaderProgram.h">
@@ -78,6 +90,18 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawableObject.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangleScene.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComplexScene.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

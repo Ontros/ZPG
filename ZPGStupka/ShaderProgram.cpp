@@ -1,4 +1,4 @@
-#include "Renderer.h"
+#include "App.h"
 #include "ShaderProgram.h"
 
 ShaderProgram::ShaderProgram(const char* vertexShaderPath, const char* fragmentShaderPath) : m_vertShader (vertexShaderPath, GL_VERTEX_SHADER), m_fragShader(fragmentShaderPath, GL_FRAGMENT_SHADER)
@@ -18,8 +18,13 @@ ShaderProgram::ShaderProgram(const char* vertexShaderPath, const char* fragmentS
 		glGetProgramInfoLog(m_id, infoLogLength, NULL, strInfoLog);
 		fprintf(stderr, "Linker failure: %s\n", strInfoLog);
 		delete[] strInfoLog;
-		Renderer::s_throwRuntimeError("Shader failed to compile");
+		App::s_throwRuntimeError("Shader failed to compile");
 	}
+}
+
+ShaderProgram::~ShaderProgram()
+{
+	if (m_id) glDeleteProgram(m_id);
 }
 
 void ShaderProgram::setShader() const
@@ -42,7 +47,7 @@ GLint ShaderProgram::findUniformLocation(const char* uniformName) const
 	GLint id = glGetUniformLocation(m_id, uniformName);
 	if (id == -1) {
 		printf("Uniform: %s\n", uniformName);
-		Renderer::s_throwRuntimeError("Failed to find uniform");
+		App::s_throwRuntimeError("Failed to find uniform");
 	}
 	return id;
 }
